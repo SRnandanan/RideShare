@@ -1,16 +1,15 @@
 package com.application.rideshare.models;
 
-public class Vehicle {
+public abstract class Vehicle {
 
-    String numberPlate;
-
-    String type;
+    protected String numberPlate;
 
 
-    public Vehicle(String numberPlate, String type) {
+    public Vehicle(String numberPlate) {
         this.numberPlate = numberPlate;
-        this.type = type;
     }
+
+    public abstract double getFare();
 
     public String getNumberPlate() {
         return numberPlate;
@@ -20,11 +19,4 @@ public class Vehicle {
         this.numberPlate = numberPlate;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 }

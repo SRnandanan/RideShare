@@ -1,29 +1,14 @@
 package com.application.rideshare.models;
 
-public class Passenger {
+public class Passenger extends User{
 
-    String name;
-
-    Location location;
 
     public Passenger(String name, Location location) {
-        this.name = name;
-        this.location = location;
+        super(name, location);
     }
 
-    public String getName() {
-        return name;
+    public void notify(String message){
+        System.out.println(message);
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
 }

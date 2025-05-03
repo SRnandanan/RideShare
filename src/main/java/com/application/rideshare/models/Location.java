@@ -10,6 +10,14 @@ public class Location {
         this.longitude = longitude;
     }
 
+    public double calcDistanceFromLocation(Location l2){
+
+        return Math.sqrt(
+                Math.pow(this.getLatitude()-l2.getLatitude(), 2) +
+                        Math.pow(this.getLongitude()-l2.getLongitude(),2)
+        );
+    }
+
     public double getLatitude() {
         return latitude;
     }
