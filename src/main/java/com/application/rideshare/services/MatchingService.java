@@ -1,10 +1,7 @@
 package com.application.rideshare.services;
 
 import com.application.rideshare.interfaces.FareStrategy;
-import com.application.rideshare.models.Driver;
-import com.application.rideshare.models.Location;
-import com.application.rideshare.models.Passenger;
-import com.application.rideshare.models.Vehicle;
+import com.application.rideshare.models.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +29,20 @@ public class MatchingService {
 
         //find the nearest driver
         Driver assignedDriver = findNearestDriver(p.getLocation());
-        p.notify("Ride scheduled succesfully with driver "+assignedDriver.getName());
+        this.drivers.remove(assignedDriver);
+
+        Ride ride = new Ride(p,assignedDriver,distance,strategy);
+
+        p.notify("Ride scheduled with rupees "+ride.getFare());
+        assignedDriver.notify("New ride request with fare "+ride.getFare());
+
+        //change status of ride
+        ride.updateStatus(RideStatus.PENDING);
+
+        //Change status of the ride after ride is finished, driver becomes available again
+
+        ride.updateStatus(RideStatus.COMPLETED);
+        drivers.add(assignedDriver);
     }
 
     private Driver findNearestDriver(Location location) {
